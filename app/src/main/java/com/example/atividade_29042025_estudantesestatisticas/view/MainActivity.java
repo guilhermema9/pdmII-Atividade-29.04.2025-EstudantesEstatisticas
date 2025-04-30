@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel estudanteViewModel;
+    private MainViewModel viewModel;
     private ArrayAdapter<String> adapterEstudantes;
     private ListView listViewNome;
     private Button buttonEstatisticas;
@@ -44,18 +44,18 @@ public class MainActivity extends AppCompatActivity {
         listViewNome = findViewById(R.id.listViewNome);
         buttonEstatisticas = findViewById(R.id.buttonEstatisticas);
 
-        estudanteViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        estudanteViewModel.getEstudantes().observe(this, estudantes -> {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.getEstudantes().observe(this, estudantes -> {
             if (estudantes != null && !estudantes.isEmpty()){
                 List<String> listaEstudantes = new ArrayList<>();
                 for (Estudante e : estudantes){
                     listaEstudantes.add(e.getNome());
                 }
-                Log.i("IF",estudanteViewModel.getEstudantes().toString());
+                Log.i("IF", viewModel.getEstudantes().toString());
                 adapterEstudantes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listaEstudantes);
                 listViewNome.setAdapter(adapterEstudantes);
             } else {
-                Log.i("ELSE",estudanteViewModel.getEstudantes().toString());
+                Log.i("ELSE", viewModel.getEstudantes().toString());
             }
         });
 

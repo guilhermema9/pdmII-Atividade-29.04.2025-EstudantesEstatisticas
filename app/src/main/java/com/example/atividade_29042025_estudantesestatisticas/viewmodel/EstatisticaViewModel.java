@@ -1,4 +1,6 @@
 package com.example.atividade_29042025_estudantesestatisticas.viewmodel;
 
-public class EstatisticaViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class EstatisticaViewModel extends ViewModel {
 }

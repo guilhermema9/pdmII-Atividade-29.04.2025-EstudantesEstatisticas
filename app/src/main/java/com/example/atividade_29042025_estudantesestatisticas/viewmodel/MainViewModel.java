@@ -24,12 +24,10 @@ public class MainViewModel extends ViewModel {
     private ExecutorService executorService;
 
     public MainViewModel() {
-        buscaEstudantesDaApi();
         estudantesListLiveData = new MutableLiveData<>();
-        //estudantesListLiveData.postValue(listaEstudantes);
     }
 
-    private void buscaEstudantesDaApi(){
+    public LiveData<List<Estudante>> getEstudantes(){
         executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
@@ -44,14 +42,10 @@ public class MainViewModel extends ViewModel {
                     System.out.println(listaEstudantesGson);
                     estudantesListLiveData.postValue(listaEstudantesGson);
                 } else {
-                    Log.e("ProdutoViewModel","Erro JSON");
+                    Log.e("Erro","Erro JSON");
                 }
             }
         });
-
-    }
-
-    public LiveData<List<Estudante>> getEstudantes(){
         return estudantesListLiveData;
     }
 }
