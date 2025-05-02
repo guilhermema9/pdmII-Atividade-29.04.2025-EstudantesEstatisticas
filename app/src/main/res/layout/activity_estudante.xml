@@ -1,62 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:background="@android:color/white"
     tools:context=".view.EstudanteActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Nome -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome: "/>
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
-    <TextView
-        android:id="@+id/textViewNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nome:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textViewNome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Idade -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Idade: "/>
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
-    <TextView
-        android:id="@+id/textViewIdade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Idade:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textViewIdade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Média Final -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Média Final: "/>
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
-    <TextView
-        android:id="@+id/textViewMedia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Média Final:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textViewMedia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Presença com % -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Presença: "/>
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
-    <TextView
-        android:id="@+id/textViewPresenca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Presença:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textViewPresenca"
+            android:layout_width="wrap_content"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="%"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <!-- Situação -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Situação: "/>
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
 
-    <TextView
-        android:id="@+id/textViewSituacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Situação:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textViewSituacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
 
 </LinearLayout>

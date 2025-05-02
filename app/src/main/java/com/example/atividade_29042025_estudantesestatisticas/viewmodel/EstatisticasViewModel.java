@@ -13,17 +13,18 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainViewModel extends ViewModel {
+public class EstatisticasViewModel extends ViewModel {
 
     private static final String URL = "https://10.0.2.2:8080/estudantes/";
     private MutableLiveData<List<Estudante>> estudantesListLiveData;
     private ExecutorService executorService;
 
-    public MainViewModel() {
+    public EstatisticasViewModel() {
         estudantesListLiveData = new MutableLiveData<>();
         carregarEstudantesApi();
     }
@@ -38,7 +39,20 @@ public class MainViewModel extends ViewModel {
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<Estudante>>(){}.getType();
                 List<Estudante> listaEstudantesGson = gson.fromJson(textoJson, type);
-                estudantesListLiveData.postValue(listaEstudantesGson);
+
+                List<Estudante> listaEstudantesCompleta = new ArrayList<>();
+                for (Estudante estudante : listaEstudantesGson){
+
+                        String urlCompleta = URL + estudante.getId();
+                        InputStream inputStreamCompleta = conexao.obterRespostaHttp(urlCompleta);
+                        String textoJsonCompleto = conexao.converter(inputStreamCompleta);
+                        if (textoJsonCompleto != null){
+                            Estudante estudanteCompleto = gson.fromJson(textoJsonCompleto, Estudante.class);
+                            listaEstudantesCompleta.add(estudanteCompleto);
+                        }
+
+                }
+                estudantesListLiveData.postValue(listaEstudantesCompleta);
             } else {
                 Log.e("Erro","Erro JSON");
             }

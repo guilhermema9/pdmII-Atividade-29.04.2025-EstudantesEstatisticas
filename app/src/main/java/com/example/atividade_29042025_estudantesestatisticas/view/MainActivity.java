@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 for (Estudante e : estudantes){
                     listaEstudantes.add(e.getNome());
                 }
-                Log.i("IF", viewModel.getEstudantes().toString());
                 adapterEstudantes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listaEstudantes);
                 listViewNome.setAdapter(adapterEstudantes);
             } else {
-                Log.i("ELSE", viewModel.getEstudantes().toString());
+                Toast.makeText(this, "Erro ao buscar dados da API", Toast.LENGTH_SHORT).show();
             }
         });
 

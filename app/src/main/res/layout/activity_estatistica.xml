@@ -5,11 +5,69 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
     tools:context=".view.EstatisticaActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ESTATISTICAS"/>
+        android:text="Média Geral da Turma: "/>
+
+    <TextView
+        android:id="@+id/textViewMediaGeral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aluno com maior nota: "/>
+
+    <TextView
+        android:id="@+id/textViewAlunoMaiorNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aluno com menor nota: "/>
+
+    <TextView
+        android:id="@+id/textViewAlunoMenorNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Média de idade da turma: "/>
+
+    <TextView
+        android:id="@+id/textViewMediaIdadeTurma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alunos Aprovados: "/>
+
+    <ListView
+        android:id="@+id/listViewAlunosAprovados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alunos Reprovados: "/>
+
+    <ListView
+        android:id="@+id/listViewAlunosReprovados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

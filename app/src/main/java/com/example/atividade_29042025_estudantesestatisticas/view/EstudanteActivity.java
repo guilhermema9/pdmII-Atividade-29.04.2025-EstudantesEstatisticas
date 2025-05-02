@@ -11,8 +11,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.atividade_29042025_estudantesestatisticas.R;
+import com.example.atividade_29042025_estudantesestatisticas.service.CalculosEstudanteService;
 import com.example.atividade_29042025_estudantesestatisticas.viewmodel.EstudanteViewModel;
-import com.example.atividade_29042025_estudantesestatisticas.viewmodel.MainViewModel;
+
+import java.util.List;
 
 public class EstudanteActivity extends AppCompatActivity {
 
@@ -47,8 +49,9 @@ public class EstudanteActivity extends AppCompatActivity {
             if (estudante != null ){
                 textViewNome.setText(estudante.getNome());
                 textViewIdade.setText(String.valueOf(estudante.getIdade()));
-                textViewMedia.setText(String.valueOf(estudante.getNotas()));
-                textViewPresenca.setText(String.valueOf(estudante.getPresenca()));
+                textViewMedia.setText(CalculosEstudanteService.calculaMediaFinal(estudante));
+                textViewPresenca.setText(CalculosEstudanteService.calculaPresenca(estudante));
+                textViewSituacao.setText(CalculosEstudanteService.calculaSituacaoFinal(estudante));
             }
         });
 
