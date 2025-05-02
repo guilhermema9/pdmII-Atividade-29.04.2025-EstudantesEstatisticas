@@ -9,14 +9,6 @@ import java.util.List;
 
 public class CalculosEstudanteService {
 
-    public static List<String> preencheListaNotasEstudante(Estudante estudante) {
-        List<String> notas = new ArrayList<>();
-        for (int i=0 ; i<estudante.getNotas().size() ; i++){
-            notas.add(String.valueOf(estudante.getNotas().get(i)));
-        }
-        return notas;
-    }
-
     public static String calculaPresenca(Estudante estudante) {
         double qtdePresenca=0, porcentPresenca=0;
         for (int i = 0; i < estudante.getPresenca().size(); i++) {
@@ -47,18 +39,17 @@ public class CalculosEstudanteService {
         }
     }
 
-    // Estatisticas Activity
-
-    public static float calculaMediaGeralTurma(List<Estudante> estudantes){
-        float mediaGeral = 0 ;
+    public static String calculaMediaGeralTurma(List<Estudante> estudantes){
+        float somaMediaGeral = 0 , mediaGeralTurma = 0;
         int qtdeNotas = 0;
         for (Estudante estudante : estudantes) {
             for (int i=0 ; i<estudante.getNotas().size() ; i++){
-                mediaGeral = mediaGeral + estudante.getNotas().get(i);
+                somaMediaGeral = somaMediaGeral + estudante.getNotas().get(i);
                 qtdeNotas++;
             }
         }
-        return mediaGeral / qtdeNotas;
+        mediaGeralTurma = somaMediaGeral / qtdeNotas;
+        return String.format("%.2f",mediaGeralTurma);
     }
 
     public static String alunoMaiorNota(List<Estudante> estudantes){
@@ -96,12 +87,13 @@ public class CalculosEstudanteService {
         return alunoMenorNota;
     }
 
-    public static float calculaMediaIdadeTurma(List<Estudante> estudantes){
-        float somaIdade=0;
+    public static String calculaMediaIdadeTurma(List<Estudante> estudantes){
+        float somaIdade=0, mediaIdadeTurma=0;
         for (Estudante estudante : estudantes) {
             somaIdade = somaIdade + estudante.getIdade();
         }
-        return somaIdade / estudantes.size();
+        mediaIdadeTurma = somaIdade / estudantes.size();
+        return String.format("%.0f",mediaIdadeTurma);
     }
 
     public static List<String> alunosAprovados(List<Estudante> estudantes){

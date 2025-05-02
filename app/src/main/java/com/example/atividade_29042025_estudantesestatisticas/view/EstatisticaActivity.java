@@ -49,13 +49,11 @@ public class EstatisticaActivity extends AppCompatActivity {
 
         estatisticasViewModel = new ViewModelProvider(this).get(EstatisticasViewModel.class);
         estatisticasViewModel.getEstudantes().observe(this, estudantes -> {
-            Log.i("Lista EStudantes Activity",String.valueOf(estudantes));
-
             if (estudantes != null && !estudantes.isEmpty()){
-                textViewMediaGeral.setText(String.valueOf(CalculosEstudanteService.calculaMediaGeralTurma(estudantes)));
+                textViewMediaGeral.setText(CalculosEstudanteService.calculaMediaGeralTurma(estudantes));
                 textViewAlunoMaiorNota.setText(CalculosEstudanteService.alunoMaiorNota(estudantes));
                 textViewAlunoMenorNota.setText(CalculosEstudanteService.alunoMenorNota(estudantes));
-                textViewMediaIdadeTurma.setText(String.valueOf(CalculosEstudanteService.calculaMediaIdadeTurma(estudantes)));
+                textViewMediaIdadeTurma.setText(CalculosEstudanteService.calculaMediaIdadeTurma(estudantes));
                 List<String> listaEstudantesAprovados = CalculosEstudanteService.alunosAprovados(estudantes);
                 List<String> listaEstudantesReprovados = CalculosEstudanteService.alunosReprovados(estudantes);
                 adapterAprovados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaEstudantesAprovados);

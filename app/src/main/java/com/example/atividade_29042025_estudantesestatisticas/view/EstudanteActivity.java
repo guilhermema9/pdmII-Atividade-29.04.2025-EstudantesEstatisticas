@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -51,7 +52,14 @@ public class EstudanteActivity extends AppCompatActivity {
                 textViewIdade.setText(String.valueOf(estudante.getIdade()));
                 textViewMedia.setText(CalculosEstudanteService.calculaMediaFinal(estudante));
                 textViewPresenca.setText(CalculosEstudanteService.calculaPresenca(estudante));
-                textViewSituacao.setText(CalculosEstudanteService.calculaSituacaoFinal(estudante));
+                String situacao = CalculosEstudanteService.calculaSituacaoFinal(estudante);
+                textViewSituacao.setText(situacao);
+                if (situacao.equals("Aprovado")){
+                    textViewSituacao.setTextColor(ContextCompat.getColor(this,R.color.green));
+                } else {
+                    textViewSituacao.setTextColor(ContextCompat.getColor(this,R.color.red));
+                }
+
             }
         });
 
