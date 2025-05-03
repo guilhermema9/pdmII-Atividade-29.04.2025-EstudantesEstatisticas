@@ -33,7 +33,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Nome -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,13 +56,12 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/outline" />
 
-        <!-- Idade -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +89,6 @@
             android:layout_height="1dp"
             android:background="@color/outline" />
 
-        <!-- Média Final -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,7 +116,6 @@
             android:layout_height="1dp"
             android:background="@color/outline" />
 
-        <!-- Presença -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,7 +151,6 @@
             android:layout_height="1dp"
             android:background="@color/outline" />
 
-        <!-- Situação -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
