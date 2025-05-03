@@ -13,8 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.atividade_29042025_estudantesestatisticas.R;
+import com.example.atividade_29042025_estudantesestatisticas.adapter.AlunosAdapter;
 import com.example.atividade_29042025_estudantesestatisticas.model.Estudante;
 import com.example.atividade_29042025_estudantesestatisticas.service.CalculosEstudanteService;
 import com.example.atividade_29042025_estudantesestatisticas.viewmodel.EstatisticasViewModel;
@@ -26,8 +29,8 @@ public class EstatisticaActivity extends AppCompatActivity {
 
     private EstatisticasViewModel estatisticasViewModel;
     private TextView textViewMediaGeral, textViewAlunoMaiorNota, textViewAlunoMenorNota, textViewMediaIdadeTurma;
-    private ListView listViewAlunosAprovados, listViewAlunosReprovados;
-    private ArrayAdapter<String> adapterAprovados, adapterReprovados;
+    private RecyclerView recyclerViewAlunosAprovados, recyclerViewAlunosReprovados;
+    private AlunosAdapter adapterAprovados, adapterReprovados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,8 @@ public class EstatisticaActivity extends AppCompatActivity {
         textViewAlunoMaiorNota = findViewById(R.id.textViewAlunoMaiorNota);
         textViewAlunoMenorNota = findViewById(R.id.textViewAlunoMenorNota);
         textViewMediaIdadeTurma = findViewById(R.id.textViewMediaIdadeTurma);
-        listViewAlunosAprovados = findViewById(R.id.listViewAlunosAprovados);
-        listViewAlunosReprovados = findViewById(R.id.listViewAlunosReprovados);
+        recyclerViewAlunosAprovados = findViewById(R.id.recyclerViewAlunosAprovados);
+        recyclerViewAlunosReprovados = findViewById(R.id.recyclerViewAlunosReprovados);
 
         estatisticasViewModel = new ViewModelProvider(this).get(EstatisticasViewModel.class);
         estatisticasViewModel.getEstudantes().observe(this, estudantes -> {
@@ -56,10 +59,14 @@ public class EstatisticaActivity extends AppCompatActivity {
                 textViewMediaIdadeTurma.setText(CalculosEstudanteService.calculaMediaIdadeTurma(estudantes));
                 List<String> listaEstudantesAprovados = CalculosEstudanteService.alunosAprovados(estudantes);
                 List<String> listaEstudantesReprovados = CalculosEstudanteService.alunosReprovados(estudantes);
-                adapterAprovados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaEstudantesAprovados);
-                adapterReprovados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaEstudantesReprovados);
-                listViewAlunosAprovados.setAdapter(adapterAprovados);
-                listViewAlunosReprovados.setAdapter(adapterReprovados);
+
+                recyclerViewAlunosAprovados.setLayoutManager(new LinearLayoutManager(this));
+                adapterAprovados = new AlunosAdapter(listaEstudantesAprovados);
+                recyclerViewAlunosAprovados.setAdapter(adapterAprovados);
+
+                recyclerViewAlunosReprovados.setLayoutManager(new LinearLayoutManager(this));
+                adapterReprovados = new AlunosAdapter(listaEstudantesReprovados);
+                recyclerViewAlunosReprovados.setAdapter(adapterReprovados);
             } else {
                 Toast.makeText(this, "Erro ao buscar dados da API", Toast.LENGTH_SHORT).show();
             }

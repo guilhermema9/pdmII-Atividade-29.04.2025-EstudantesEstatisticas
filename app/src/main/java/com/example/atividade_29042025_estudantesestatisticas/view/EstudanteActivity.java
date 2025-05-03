@@ -41,8 +41,8 @@ public class EstudanteActivity extends AppCompatActivity {
         textViewPresenca = findViewById(R.id.textViewPresenca);
         textViewSituacao = findViewById(R.id.textViewSituacao);
 
-        idEstudante = getIntent().getIntExtra("id",idEstudante);
-        idEstudante++; // itera para corrigir a posição da lista com o id do respectivo estudante
+        idEstudante = getIntent().getIntExtra("id",0);
+        idEstudante++;
 
         estudanteViewModel = new ViewModelProvider(this).get(EstudanteViewModel.class);
 
@@ -59,10 +59,7 @@ public class EstudanteActivity extends AppCompatActivity {
                 } else {
                     textViewSituacao.setTextColor(ContextCompat.getColor(this,R.color.red));
                 }
-
             }
         });
-
-
     }
 }

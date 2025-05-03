@@ -41,9 +41,23 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp" />
 
-    <!-- ListView com TextAppearance.ListItem (definido no tema) e ripple -->
-    <ListView
-        android:id="@+id/listViewNome"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNome"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:background="@color/surface"
+    android:padding="4dp"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/item_estudante" />
+
+<!--
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNome"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -56,6 +70,7 @@
         android:clipToPadding="false"
         android:listSelector="?attr/selectableItemBackground"
         android:scrollbarStyle="outsideOverlay" />
+    -->
 
     <!-- Botão Material para estatísticas, usando cor primária do tema -->
     <Button

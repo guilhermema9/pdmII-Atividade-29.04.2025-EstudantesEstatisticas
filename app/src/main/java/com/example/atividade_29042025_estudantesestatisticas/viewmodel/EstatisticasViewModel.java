@@ -50,7 +50,6 @@ public class EstatisticasViewModel extends ViewModel {
                             Estudante estudanteCompleto = gson.fromJson(textoJsonCompleto, Estudante.class);
                             listaEstudantesCompleta.add(estudanteCompleto);
                         }
-
                 }
                 estudantesListLiveData.postValue(listaEstudantesCompleta);
             } else {

@@ -1,7 +1,5 @@
 package com.example.atividade_29042025_estudantesestatisticas.service;
 
-import android.util.Log;
-
 import com.example.atividade_29042025_estudantesestatisticas.model.Estudante;
 
 import java.util.ArrayList;
@@ -55,7 +53,6 @@ public class CalculosEstudanteService {
     public static String alunoMaiorNota(List<Estudante> estudantes){
         String alunoMaiorNota = null;
         float maiorNota = 0;
-        Log.i("Lista EStudantes Service",String.valueOf(estudantes));
         for (Estudante estudante : estudantes){
             float mediaFinal = 0, somaNotas = 0;
             for (int i=0 ; i<estudante.getNotas().size() ; i++){
