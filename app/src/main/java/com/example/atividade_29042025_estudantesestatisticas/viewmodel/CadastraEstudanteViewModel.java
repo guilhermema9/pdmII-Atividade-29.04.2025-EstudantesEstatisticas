@@ -31,7 +31,7 @@ public class CadastraEstudanteViewModel extends ViewModel {
                 Conexao conexao = new Conexao();
                 Gson gson = new Gson();
                 String json = gson.toJson(estudante);
-                int codigoRespostaHttp = conexao.enviaDadosHttp(URL,json);
+                int codigoRespostaHttp = conexao.enviaDadosPost(URL,json);
                 Log.i("View Model", "Resposta HTTP = " + codigoRespostaHttp);
                 if (codigoRespostaHttp >= 200 && codigoRespostaHttp < 300){
                     mutableLiveData.postValue(true);

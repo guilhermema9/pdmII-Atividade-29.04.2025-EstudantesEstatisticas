@@ -1,7 +1,11 @@
 package com.example.atividade_29042025_estudantesestatisticas.view;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,17 +16,19 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.atividade_29042025_estudantesestatisticas.R;
+import com.example.atividade_29042025_estudantesestatisticas.model.Estudante;
 import com.example.atividade_29042025_estudantesestatisticas.service.CalculosEstudanteService;
 import com.example.atividade_29042025_estudantesestatisticas.viewmodel.EstudanteViewModel;
 
-import java.util.List;
-
 public class EstudanteActivity extends AppCompatActivity {
 
-    public EstudanteViewModel estudanteViewModel;
+    private Estudante estudante;
+    private EstudanteViewModel viewModel;
     private int idEstudante;
     private TextView textViewNome, textViewIdade, textViewMedia, textViewPresenca, textViewSituacao;
-
+    private Button buttonCadastraNota, buttonCadastraPresenca, buttonDeletarEstudante;
+    private EditText editTextNota;
+    private RadioGroup radioGroupPresenca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +46,24 @@ public class EstudanteActivity extends AppCompatActivity {
         textViewMedia = findViewById(R.id.textViewMedia);
         textViewPresenca = findViewById(R.id.textViewPresenca);
         textViewSituacao = findViewById(R.id.textViewSituacao);
+        buttonCadastraNota = findViewById(R.id.buttonCadastrarNota);
+        editTextNota = findViewById(R.id.editTextNota);
+        buttonCadastraPresenca = findViewById(R.id.buttonCadastrarPresenca);
+        radioGroupPresenca = findViewById(R.id.radioGroupPresenca);
 
         idEstudante = getIntent().getIntExtra("id",0);
         idEstudante++;
 
-        estudanteViewModel = new ViewModelProvider(this).get(EstudanteViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EstudanteViewModel.class);
 
-        estudanteViewModel.getEstudante(idEstudante).observe(this, estudante -> {
-            if (estudante != null ){
-                textViewNome.setText(estudante.getNome());
-                textViewIdade.setText(String.valueOf(estudante.getIdade()));
-                textViewMedia.setText(CalculosEstudanteService.calculaMediaFinal(estudante));
-                textViewPresenca.setText(CalculosEstudanteService.calculaPresenca(estudante));
-                String situacao = CalculosEstudanteService.calculaSituacaoFinal(estudante);
+        viewModel.getEstudante(idEstudante).observe(this, e -> {
+            if (e != null ){
+                estudante = e;
+                textViewNome.setText(e.getNome());
+                textViewIdade.setText(String.valueOf(e.getIdade()));
+                textViewMedia.setText(CalculosEstudanteService.calculaMediaFinal(e));
+                textViewPresenca.setText(CalculosEstudanteService.calculaPresenca(e));
+                String situacao = CalculosEstudanteService.calculaSituacaoFinal(e);
                 textViewSituacao.setText(situacao);
                 if (situacao.equals("Aprovado")){
                     textViewSituacao.setTextColor(ContextCompat.getColor(this,R.color.green));
@@ -60,6 +71,40 @@ public class EstudanteActivity extends AppCompatActivity {
                     textViewSituacao.setTextColor(ContextCompat.getColor(this,R.color.red));
                 }
             }
+        });
+
+        buttonCadastraNota.setOnClickListener(v ->{
+            Float nota = Float.valueOf(editTextNota.getText().toString());
+            estudante.notas.add(nota);
+            viewModel.atualizaEstudante(estudante).observe(EstudanteActivity.this, respostaHttp ->{
+                if (respostaHttp){
+                    Toast.makeText(EstudanteActivity.this, "Nota cadastradada com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(EstudanteActivity.this, "Erro ao cadastrar nota", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
+        buttonCadastraPresenca.setOnClickListener(v -> {
+            boolean presenca = false;
+            if (radioGroupPresenca.getCheckedRadioButtonId() == R.id.radioButtonPresente){
+                presenca = true;
+                estudante.presenca.add(presenca);
+            } else if (radioGroupPresenca.getCheckedRadioButtonId() == R.id.radioButtonAusente){
+                presenca = false;
+                estudante.presenca.add(presenca);
+            } else {
+                Toast.makeText(EstudanteActivity.this, "Selecione uma opção de presença", Toast.LENGTH_SHORT).show();
+            }
+            viewModel.atualizaEstudante(estudante).observe(EstudanteActivity.this, respostaHttp ->{
+                if (respostaHttp){
+                    Toast.makeText(EstudanteActivity.this, "Presença cadastradada com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(EstudanteActivity.this, "Erro ao cadastrar presença", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }

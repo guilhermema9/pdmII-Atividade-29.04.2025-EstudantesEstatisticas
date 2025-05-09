@@ -1,7 +1,6 @@
 package com.example.atividade_29042025_estudantesestatisticas.util;
 
 import android.net.SSLCertificateSocketFactory;
-import android.util.Log;
 
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
@@ -50,7 +49,7 @@ public class Conexao {
         return stringBuilder.toString(); // Arquivo JSON
     }
 
-    public int enviaDadosHttp(String end, String json){
+    public int enviaDadosPost(String end, String json){
         try {
             URL url = new URL(end);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -61,6 +60,26 @@ public class Conexao {
             connection.setHostnameVerifier(new AllowAllHostnameVerifier());
             OutputStream outputStream = connection.getOutputStream();
             //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+            outputStreamWriter.write(json);
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+            return connection.getResponseCode();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int atualizaDadosPut(String end, String json){
+        try {
+            URL url = new URL(end);
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
+            connection.setHostnameVerifier(new AllowAllHostnameVerifier());
+            OutputStream outputStream = connection.getOutputStream();
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
             outputStreamWriter.write(json);
             outputStreamWriter.flush();
