@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(MainActivity.this, EstudanteActivity.class);
-                        intent.putExtra("id",position);
+                        intent.putExtra("id",estudantes.get(position).id);
                         startActivity(intent);
                     }
                 });
