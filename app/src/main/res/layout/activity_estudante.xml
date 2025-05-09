@@ -240,7 +240,7 @@
                 android:layout_marginTop="8dp">
 
                 <RadioButton
-                    android:id="@+id/radioPresente"
+                    android:id="@+id/radioButtonPresente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Presente"
@@ -248,7 +248,7 @@
                     android:textSize="16sp" />
 
                 <RadioButton
-                    android:id="@+id/radioAusente"
+                    android:id="@+id/radioButtonAusente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ausente"
@@ -268,4 +268,17 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonDeletarEstudante"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="?attr/colorError"
+        android:text="Deletar Estudante"
+        android:textAllCaps="false"
+        android:textSize="12sp" />
 </LinearLayout>

@@ -50,6 +50,7 @@ public class EstudanteActivity extends AppCompatActivity {
         editTextNota = findViewById(R.id.editTextNota);
         buttonCadastraPresenca = findViewById(R.id.buttonCadastrarPresenca);
         radioGroupPresenca = findViewById(R.id.radioGroupPresenca);
+        buttonDeletarEstudante = findViewById(R.id.buttonDeletarEstudante);
 
         idEstudante = getIntent().getIntExtra("id",0);
         idEstudante++;
@@ -103,6 +104,17 @@ public class EstudanteActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(EstudanteActivity.this, "Erro ao cadastrar presença", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
+        buttonDeletarEstudante.setOnClickListener(v -> {
+            viewModel.deletaEstudante(estudante).observe(EstudanteActivity.this, respostaHttp -> {
+                if (respostaHttp){
+                    Toast.makeText(EstudanteActivity.this, "Estudante deletado com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(EstudanteActivity.this, "Erro ao deletar estudante", Toast.LENGTH_SHORT).show();
                 }
             });
         });

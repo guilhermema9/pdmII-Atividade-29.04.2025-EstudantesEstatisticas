@@ -89,4 +89,19 @@ public class Conexao {
             throw new RuntimeException(e);
         }
     }
+
+    public int deletaDadosDelete(String end){
+        try {
+            URL url = new URL(end);
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
+            connection.setHostnameVerifier(new AllowAllHostnameVerifier());
+            return connection.getResponseCode();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
