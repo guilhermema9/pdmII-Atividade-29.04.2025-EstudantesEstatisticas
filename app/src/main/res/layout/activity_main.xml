@@ -53,15 +53,28 @@
         tools:listitem="@layout/item_estudante" />
 
     <Button
-        android:id="@+id/buttonEstatisticas"
+        android:id="@+id/buttonCadastrarEstudante"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:text="Ver Estatísticas"
+        android:text="Cadastrar Novo Estudante"
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonEstatisticas"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="Ver Estatísticas da Turma"
         android:textAllCaps="false"
         android:textSize="16sp" />
 </LinearLayout>

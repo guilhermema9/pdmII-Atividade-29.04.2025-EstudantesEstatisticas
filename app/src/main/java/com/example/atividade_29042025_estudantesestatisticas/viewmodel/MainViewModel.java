@@ -48,4 +48,8 @@ public class MainViewModel extends ViewModel {
     public LiveData<List<Estudante>> getEstudantes(){
         return estudantesListLiveData;
     }
+
+    public void recarregaDadosApi(){
+        carregarEstudantesApi();
+    }
 }

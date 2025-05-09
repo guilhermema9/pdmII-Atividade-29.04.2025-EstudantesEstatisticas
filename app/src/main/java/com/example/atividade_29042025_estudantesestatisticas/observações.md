@@ -12,4 +12,18 @@
 
 - Usar RecyclerView !
 
+
+
+----
+Atividade 03 (continuação)
+
+- Definir o envio do PUT por JSON
+- Metodo PUT
+- Cadastrar Novo Estudante -> Nova Activity
+- Dentro do repository 
+- Criar classe repository para organizar os metodos (opcional)
+  - getEstudante
+  - getEstudante por id
+  - getEstudantes
+  - setEstudante
     

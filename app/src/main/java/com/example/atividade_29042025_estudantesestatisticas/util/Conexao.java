@@ -10,8 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -22,7 +25,6 @@ public class Conexao {
             URL url = new URL(end);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-
             connection.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
             connection.setHostnameVerifier(new AllowAllHostnameVerifier());
             return new BufferedInputStream(connection.getInputStream());
@@ -46,5 +48,26 @@ public class Conexao {
             e.printStackTrace();
         }
         return stringBuilder.toString(); // Arquivo JSON
+    }
+
+    public int enviaDadosHttp(String end, String json){
+        try {
+            URL url = new URL(end);
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setSSLSocketFactory(SSLCertificateSocketFactory.getInsecure(0, null));
+            connection.setHostnameVerifier(new AllowAllHostnameVerifier());
+            OutputStream outputStream = connection.getOutputStream();
+            //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+            outputStreamWriter.write(json);
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+            return connection.getResponseCode();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

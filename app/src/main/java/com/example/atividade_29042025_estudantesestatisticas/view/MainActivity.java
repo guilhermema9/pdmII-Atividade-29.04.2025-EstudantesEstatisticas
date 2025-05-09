@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private ArrayAdapter<String> adapterEstudantes;
     private RecyclerView recyclerViewNome;
-    private Button buttonEstatisticas;
+    private Button buttonEstatisticas, buttonCadastrarEstudante;
     private AlunosAdapter adapter;
 
     @Override
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewNome = findViewById(R.id.recyclerViewNome);
         buttonEstatisticas = findViewById(R.id.buttonEstatisticas);
+        buttonCadastrarEstudante = findViewById(R.id.buttonCadastrarEstudante);
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.getEstudantes().observe(this, estudantes -> {
@@ -77,5 +78,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonCadastrarEstudante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CadastraEstudanteActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.recarregaDadosApi();
     }
 }

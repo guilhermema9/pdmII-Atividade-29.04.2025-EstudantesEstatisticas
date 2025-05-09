@@ -23,6 +23,11 @@ public class Estudante {
     @Expose
     public List<Boolean> presenca;
 
+    public Estudante(String nome, Integer idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
     public Integer getId() {
         return id;
     }
