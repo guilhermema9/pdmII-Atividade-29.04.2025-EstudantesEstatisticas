@@ -53,7 +53,6 @@ public class EstudanteActivity extends AppCompatActivity {
         buttonDeletarEstudante = findViewById(R.id.buttonDeletarEstudante);
 
         idEstudante = getIntent().getIntExtra("id",0);
-        //idEstudante++;
 
         viewModel = new ViewModelProvider(this).get(EstudanteViewModel.class);
 

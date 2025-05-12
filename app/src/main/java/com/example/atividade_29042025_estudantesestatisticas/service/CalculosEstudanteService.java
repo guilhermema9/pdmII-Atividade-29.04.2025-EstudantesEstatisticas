@@ -9,6 +9,9 @@ public class CalculosEstudanteService {
 
     public static String calculaPresenca(Estudante estudante) {
         double qtdePresenca=0, porcentPresenca=0;
+        if (estudante.getPresenca().isEmpty()){
+            return "0";
+        }
         for (int i = 0; i < estudante.getPresenca().size(); i++) {
             if (estudante.getPresenca().get(i)){
                 qtdePresenca++;
@@ -20,6 +23,9 @@ public class CalculosEstudanteService {
 
     public static String calculaMediaFinal(Estudante estudante){
         float mediaFinal = 0, somaNotas = 0;
+        if (estudante.getNotas().isEmpty()){
+            return "0";
+        }
         for (int i=0 ; i < estudante.getNotas().size() ; i++){
             somaNotas = somaNotas + estudante.getNotas().get(i);
         }
@@ -30,6 +36,9 @@ public class CalculosEstudanteService {
     public static String calculaSituacaoFinal(Estudante estudante){
         float mediaFinal = Float.parseFloat(CalculosEstudanteService.calculaMediaFinal(estudante));
         float percentPresenca = Float.parseFloat(CalculosEstudanteService.calculaPresenca(estudante));
+        if (estudante.getNotas().isEmpty() || estudante.getPresenca().isEmpty()) {
+            return "Sem dados";
+        }
         if (mediaFinal >= 7 && percentPresenca >= 75){
             return "Aprovado";
         } else {
